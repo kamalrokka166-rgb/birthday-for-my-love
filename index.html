@@ -166,25 +166,6 @@
             font-weight: 600;
         }
 
-        /* Countdown Timer */
-        .countdown-box {
-            background: linear-gradient(135deg, #ff1744 0%, #ff6b9d 100%);
-            color: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            font-size: 1.2rem;
-            font-weight: 700;
-            box-shadow: 0 8px 20px rgba(255, 23, 68, 0.3);
-        }
-
-        .countdown-timer {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 15px 0;
-            letter-spacing: 2px;
-        }
-
         /* Special Boxes */
         .decree-box {
             background: linear-gradient(135deg, #fff0f3 0%, #ffe0e6 100%);
@@ -388,11 +369,6 @@
             <div class="emoji-icon">🌌</div>
             <h1>Mission Control: Security Clearance 📡</h1>
             
-            <div class="countdown-box">
-                <div>System Status: Locked until July 19th at 12:00 AM ⏱️</div>
-                <div class="countdown-timer" id="countdown">Loading...</div>
-            </div>
-
             <p class="message">
                 You are trying to access a highly classified, ultra-romantic celestial zone. No early peeking allowed, beautiful, the countdown is ticking.
             </p>
@@ -401,7 +377,7 @@
                 ⚠️ ATTENTION: Please read everything carefully and make sure you choose the correct option to proceed!
             </p>
 
-            <button class="btn" id="unlock-btn" onclick="unlockSurprise()" disabled>
+            <button class="btn" onclick="unlockSurprise()">
                 Access Orbit 🔓
             </button>
         </div>
@@ -560,34 +536,6 @@
 
         setInterval(createFloatingHeart, 500);
         setInterval(createSparkle, 800);
-
-        // Countdown Timer
-        function updateCountdown() {
-            const targetDate = new Date('2026-07-19T00:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            if (distance <= 0) {
-                document.getElementById('countdown').innerText = '🔓 UNLOCKED!';
-                document.getElementById('unlock-btn').disabled = false;
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById('countdown').innerText = 
-                `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-            if (distance <= 0) {
-                document.getElementById('unlock-btn').disabled = false;
-            }
-        }
-
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
 
         // Unlock Surprise
         function unlockSurprise() {
