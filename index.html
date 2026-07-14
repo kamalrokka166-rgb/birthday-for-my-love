@@ -10,7 +10,7 @@
             --secondary-pink: #ff7eb3;
             --dark-pink: #e0526c;
             --moon-blue: #1a1a2e;
-            --star-yellow: #ffd700;
+            --cloud-white: #f5f5ff;
             --text-color: #4a4a4a;
         }
 
@@ -22,7 +22,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: linear-gradient(180deg, #0f0f1e 0%, #1a1a3e 50%, #2d1b69 100%);
             color: var(--text-color);
             overflow-x: hidden;
             text-align: center;
@@ -52,42 +52,43 @@
         }
 
         @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
+            0%, 100% { opacity: 0.2; }
             50% { opacity: 1; }
         }
 
-        /* Floating Emoji */
-        .emoji-float {
+        /* Floating Clouds */
+        .cloud-float {
             position: absolute;
-            font-size: 40px;
-            opacity: 0.6;
-            animation: floatUp 8s ease-in infinite;
+            font-size: 60px;
+            opacity: 0.5;
+            animation: float 15s ease-in-out infinite;
             z-index: 2;
             pointer-events: none;
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0.6; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        @keyframes float {
+            0% { transform: translateX(-100vw) translateY(0); opacity: 0.3; }
+            50% { opacity: 0.6; }
+            100% { transform: translateX(100vw) translateY(-50px); opacity: 0.3; }
         }
 
         /* Main Container */
         .container {
-            max-width: 600px;
+            max-width: 650px;
             width: 90%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.97);
             border-radius: 30px;
             padding: 60px 40px;
-            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 20px 80px rgba(255, 117, 140, 0.25);
             position: relative;
             z-index: 10;
-            border: 2px solid var(--star-yellow);
+            border: 2px solid rgba(255, 117, 140, 0.3);
         }
 
         /* Page Styles */
         .page {
             display: none;
-            animation: fadeIn 0.6s ease-in;
+            animation: fadeIn 0.7s ease-in;
         }
 
         .page.active {
@@ -102,12 +103,12 @@
         .emoji-icon {
             font-size: 80px;
             margin-bottom: 20px;
-            animation: pulse 1s ease-in-out infinite;
+            animation: pulse 1.5s ease-in-out infinite;
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            50% { transform: scale(1.15); }
         }
 
         h1 {
@@ -115,17 +116,18 @@
             font-size: 2.2rem;
             margin-bottom: 20px;
             font-weight: 700;
+            line-height: 1.3;
         }
 
         h2 {
             color: var(--primary-pink);
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 15px;
             font-weight: 600;
         }
 
         .subtitle {
-            color: #666;
+            color: #888;
             font-size: 0.95rem;
             margin-bottom: 20px;
             line-height: 1.6;
@@ -134,93 +136,112 @@
         .message {
             color: var(--text-color);
             font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 30px;
+            line-height: 1.9;
+            margin-bottom: 25px;
             font-weight: 500;
         }
 
-        .lock-message {
-            font-size: 1rem;
-            color: #666;
+        .emotional-message {
+            color: var(--dark-pink);
+            font-size: 1.05rem;
+            line-height: 2;
             margin: 30px 0;
-            line-height: 1.7;
-        }
-
-        /* Time Display */
-        .time-display {
-            background: linear-gradient(to right, var(--primary-pink), var(--secondary-pink));
-            color: white;
-            padding: 15px;
-            border-radius: 15px;
-            margin: 20px 0;
-            font-size: 1.1rem;
             font-weight: 600;
         }
 
-        /* Leaderboard List */
-        .leaderboard {
-            background: #f9f0f2;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: left;
-        }
-
-        .leaderboard-item {
-            padding: 12px;
-            margin: 8px 0;
-            font-size: 1rem;
-            line-height: 1.6;
-            color: var(--text-color);
-        }
-
-        /* Contact Details */
-        .contact-details {
-            background: #f9f0f2;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: left;
-        }
-
-        .contact-item {
-            padding: 10px;
-            margin: 8px 0;
-            font-size: 1rem;
-            color: var(--text-color);
-        }
-
-        /* Error Message */
-        .error-box {
-            background: #ffe0e6;
-            border: 2px solid var(--primary-pink);
+        /* Special Boxes */
+        .decree-box {
+            background: linear-gradient(135deg, #fff0f3 0%, #fffaf0 100%);
+            border-left: 5px solid var(--primary-pink);
             border-radius: 15px;
             padding: 25px;
-            margin: 20px 0;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .decree-item {
+            padding: 12px 0;
+            color: var(--text-color);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .gift-box {
+            background: linear-gradient(135deg, #ffe0e6 0%, #fff0f3 100%);
+            border: 3px solid var(--primary-pink);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 25px 0;
+            box-shadow: 0 10px 30px rgba(255, 117, 140, 0.15);
+        }
+
+        .gift-text {
+            color: var(--dark-pink);
+            font-size: 1.15rem;
+            font-weight: 700;
+            line-height: 1.9;
+        }
+
+        .error-box {
+            background: linear-gradient(135deg, #ffe0e6 0%, #fff5f7 100%);
+            border: 3px solid var(--primary-pink);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 25px 0;
+            box-shadow: 0 10px 30px rgba(255, 117, 140, 0.2);
         }
 
         .error-text {
             color: var(--dark-pink);
             font-size: 1.1rem;
             font-weight: 600;
-            line-height: 1.8;
+            line-height: 1.9;
         }
 
-        /* Gift Reveal Box */
-        .gift-box {
-            background: linear-gradient(135deg, #ffe0e6 0%, #fff0f3 100%);
-            border: 3px solid var(--primary-pink);
-            border-radius: 20px;
-            padding: 30px;
+        /* Form Styles */
+        .form-group {
             margin: 20px 0;
-            box-shadow: 0 10px 30px rgba(255, 117, 140, 0.2);
+            text-align: left;
         }
 
-        .gift-text {
+        .form-label {
+            display: block;
             color: var(--dark-pink);
-            font-size: 1.2rem;
-            font-weight: 700;
-            line-height: 1.8;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--primary-pink);
+            border-radius: 10px;
+            font-size: 1rem;
+            color: var(--text-color);
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--dark-pink);
+            box-shadow: 0 0 10px rgba(255, 117, 140, 0.3);
+        }
+
+        .contact-box {
+            background: #f9f0f2;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .contact-item {
+            padding: 15px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            font-weight: 600;
         }
 
         /* Buttons */
@@ -232,55 +253,52 @@
             font-size: 1.1rem;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 8px 25px rgba(255, 117, 140, 0.3);
-            margin-top: 20px;
+            box-shadow: 0 8px 25px rgba(255, 117, 140, 0.35);
+            margin-top: 25px;
             transition: all 0.3s ease;
-            font-weight: 600;
+            font-weight: 700;
             width: 100%;
         }
 
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(255, 117, 140, 0.4);
+            box-shadow: 0 12px 35px rgba(255, 117, 140, 0.5);
         }
 
         .btn:active {
             transform: translateY(-1px);
         }
 
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
         /* Button Container for Multiple Buttons */
         .button-container {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         .btn-alt {
             flex: 1;
-            min-width: 150px;
+            min-width: 140px;
+            padding: 14px 25px;
         }
 
-        /* Lock Status */
-        .lock-status {
-            background: #fff0f3;
-            border-left: 4px solid var(--primary-pink);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
+        /* Final Page Styling */
+        .final-message {
+            background: linear-gradient(135deg, #fff0f3 0%, #fffaf0 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            border: 2px solid var(--primary-pink);
+            line-height: 2;
+            font-size: 1.05rem;
+            color: var(--text-color);
+        }
+
+        .final-message-text {
             color: var(--dark-pink);
             font-weight: 600;
-        }
-
-        .lock-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
+            font-size: 1.15rem;
         }
 
         /* Responsive */
@@ -292,6 +310,10 @@
 
             h1 {
                 font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
             }
 
             .emoji-icon {
@@ -306,140 +328,165 @@
                 padding: 14px 30px;
                 font-size: 1rem;
             }
+
+            .button-container {
+                gap: 8px;
+            }
+
+            .btn-alt {
+                min-width: 120px;
+                padding: 12px 20px;
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="starfield" id="starfield"></div>
-    <div id="emoji-container"></div>
+    <div id="cloud-container"></div>
 
     <div class="container">
         <!-- Page 1: Entering Orbit -->
         <div class="page active" id="page1">
-            <div class="emoji-icon">🚀</div>
-            <h1>Mission Control: Birthday Verification</h1>
-            <p class="lock-message">
-                You are trying to enter a highly classified celestial zone. Access is strictly denied unless it is officially 12:00 AM on your birthday.
+            <div class="emoji-icon">🌌</div>
+            <h1>Connection Request... 📡</h1>
+            <p class="message">
+                I know it has been about 6 months since my signal went dark. I know the sky has been quiet, and I know you might be hurt or angry. But tonight, the moon brought me back to you. I couldn't let your day pass without trying to re-enter your orbit.
             </p>
-            <p class="lock-message">
-                Scan your birthday vibes below to proceed. No cheating.
+            <p class="message">
+                If you're willing to drift through the clouds with me for just a few minutes, click below.
             </p>
-
-            <div class="time-display">
-                Current Time: <span id="current-time">Loading...</span>
-            </div>
-
-            <div class="lock-status">
-                <div class="lock-icon">🔒</div>
-                <div id="lock-status-text">Not yet! Come back at midnight on your birthday.</div>
-            </div>
-
-            <button class="btn" id="unlock-btn" onclick="unlockSurprise()" disabled>
-                Initiate Launch Sequence 🔓
-            </button>
+            <button class="btn" onclick="nextPage(1, 2)">Walk through the clouds ☁️</button>
         </div>
 
-        <!-- Page 2: The New Lunar Cycle -->
+        <!-- Page 2: The Soft Claim -->
         <div class="page" id="page2">
             <div class="emoji-icon">🌙</div>
-            <h1>Happy Birthday to my favorite human on earth!</h1>
+            <h1>Happy Birthday to the girl who belongs to me.</h1>
             <p class="message">
-                You officially survived another year of dealing with me. That alone should earn you an astronaut medal. I hope your day is completely out of this world.
+                You officially survived another year of dealing with the universe, but more importantly, another year of being my favorite person. Even though we've had this distance, nobody else gets to claim your heart. I hope your day is as beautiful and peaceful as a midnight sky.
             </p>
-            <button class="btn" onclick="nextPage(2, 3)">Request Space Supplies 👉</button>
+            <button class="btn" onclick="nextPage(2, 3)">Float to the next step ✨</button>
         </div>
 
-        <!-- Page 3: The Gravity Check -->
+        <!-- Page 3: The Cloud Sanctuary -->
         <div class="page" id="page3">
-            <div class="emoji-icon">🎙️</div>
-            <h2>Talking to the Moon? Nah, Talking to You.</h2>
+            <div class="emoji-icon">☁️🛌</div>
+            <h2>Your Lunar Decrees for Today:</h2>
             <p class="message">
-                Distance is trash, but honestly, gravity just works differently with us. Even though we are miles apart under the same sky, you're the only person I'd willingly lose sleep for during our endless late-night calls.
+                Since you rule this galaxy today, you are officially commanded to:
             </p>
-            <p class="message">
-                You're basically my favorite distraction in the entire universe.
-            </p>
-            <button class="btn" onclick="nextPage(3, 4)">Check the Flight Radar 👉</button>
-        </div>
-
-        <!-- Page 4: Why You're a Star (Literally) -->
-        <div class="page" id="page4">
-            <div class="emoji-icon">✨</div>
-            <h2>The Lunar Leaderboard</h2>
-            <p class="message">
-                Just a quick reminder of why you are top tier:
-            </p>
-            <div class="leaderboard">
-                <div class="leaderboard-item">🌕 You actually match my energy and haven't blocked me yet.</div>
-                <div class="leaderboard-item">🌖 Your laugh (even when you're roasting my terrible jokes).</div>
-                <div class="leaderboard-item">🌗 You are easily the prettiest view in the galaxy.</div>
-                <div class="leaderboard-item">🌘 You're genuinely my absolute best friend.</div>
+            <div class="decree-box">
+                <div class="decree-item">☁️ Sleep in under a blanket of clouds for as long as your heart desires.</div>
+                <div class="decree-item">🍰 Eat every single one of your favorite treats (lunar gravity means birthday calories don't count).</div>
+                <div class="decree-item">🌙 Stare at the moon later and know that someone is looking at the exact same sky, missing you deeply.</div>
             </div>
-            <button class="btn" onclick="nextPage(4, 5)">Travel to the Dark Side of the Moon 👉</button>
+            <button class="btn" onclick="nextPage(3, 4)">Click for a Secret Voucher 🍿</button>
         </div>
 
-        <!-- Page 5: The Crew Evaluation -->
-        <div class="page" id="page5">
-            <div class="emoji-icon">🤔</div>
+        <!-- Page 4: The Ultimate Trap -->
+        <div class="page" id="page4">
+            <div class="emoji-icon">🥺</div>
             <h2>Moment of Truth...</h2>
             <p class="message">
-                Be honest. Are you actually enjoying this moon-themed surprise so far? Think carefully before you click.
+                I know I've been gone for 6 months. I know you're mad. So let's face it—how angry are you actually?
             </p>
             <div class="button-container">
-                <button class="btn btn-alt" onclick="nextPage(5, 6)">Yes, I love it! 😍</button>
-                <button class="btn btn-alt" onclick="showError()">No, it's mid 🥱</button>
+                <button class="btn btn-alt" onclick="trapChoice()">I'm absolutely furious 🤬</button>
+                <button class="btn btn-alt" onclick="trapChoice()">I'm ignoring you 🥞</button>
             </div>
         </div>
 
-        <!-- Page 5.5: System Override -->
-        <div class="page" id="page5_5">
+        <!-- Page 4.5: ERROR Timeout -->
+        <div class="page" id="page4_5">
             <div class="emoji-icon">🛑</div>
-            <h2>ERROR 404: Gravity Failure</h2>
+            <h2>ERROR: Heartbeat Timeout</h2>
             <div class="error-box">
                 <p class="error-text">
-                    System Error!<br><br>
-                    Nice try, but that option does not exist in this galaxy. You have to like this website, and honestly, you have to like the astronaut who built it for you too.<br><br>
-                    The system has automatically fixed your incorrect choice. Try again:
+                    Nice try, but you're blocked from staying mad! ☁️<br><br>
+                    Access Denied! The system completely crashed because it refuses to let you be angry on your birthday. You don't get a choice here—the clouds have automatically overridden your attitude.<br><br>
+                    You're stuck with me, and you have to let me make it up to you.
                 </p>
             </div>
             <div class="button-container">
-                <button class="btn btn-alt" onclick="nextPage(5, 6)">Yes, I love it! 😍</button>
-                <button class="btn btn-alt" onclick="nextPage(5, 6)">Yes, he's the best in the universe 🐐</button>
+                <button class="btn btn-alt" onclick="nextPage(4, 5)">Fine, what do you have to say? 🌙</button>
+                <button class="btn btn-alt" onclick="nextPage(4, 5)">Show me the real surprise 🎁</button>
             </div>
         </div>
 
-        <!-- Page 6: The Ultimate Loot Drop -->
-        <div class="page" id="page6">
-            <div class="emoji-icon">🎁</div>
-            <h2>The Real Gift...</h2>
-            <p class="message">
-                You might be looking around your room or checking your email for a gift drop right now... but you won't find it there.
-            </p>
+        <!-- Page 5: The Grand Apology -->
+        <div class="page" id="page5">
+            <div class="emoji-icon">🌌❤️</div>
+            <h2>My Biggest Mistake...</h2>
             <div class="gift-box">
                 <p class="gift-text">
-                    Because the real gift isn't something I can mail. The gift is me coming to see you in person. ✈️❤️
+                    Leaving you in the dark for 6 months was the biggest mistake I've ever made. I am so deeply sorry for the silence, for the distance, and for making a girl as sensitive and precious as you feel left behind. You deserved better, and I hate that I wasn't there.
                 </p>
             </div>
             <p class="message">
-                The countdown to our next link-up starts right now. Prepare for arrival!
+                A gift in the mail isn't enough to fix this. A website isn't enough. The real gift is me coming to see you in person. I want to stand under the same moon, look into your eyes, and apologize properly.
             </p>
-            <button class="btn" onclick="nextPage(6, 7)">Secure Your Arrival Date 📲</button>
+            <button class="btn" onclick="nextPage(5, 6)">Claim Your Gift & Plan Our Meetup 🛸</button>
         </div>
 
-        <!-- Page 7: Final Landing -->
-        <div class="page" id="page7">
-            <div class="emoji-icon">📞</div>
-            <h2>Report Back to Base</h2>
+        <!-- Page 6: Meetup Form -->
+        <div class="page" id="page6">
+            <div class="emoji-icon">🗺️</div>
+            <h2>You Call the Shots.</h2>
             <p class="message">
-                You are legally required to contact the mastermind behind this space mission immediately to claim your in-person hug:
+                Since I'm coming to see you, you have full control over our reunion. Fill out this landing manifest, take a screenshot, and send it straight to my WhatsApp!
             </p>
-            <div class="contact-details">
-                <div class="contact-item">📱 Call/WhatsApp: <strong>1234577890</strong></div>
+
+            <form id="meetup-form">
+                <div class="form-group">
+                    <label class="form-label">📍 Where do you want to meet?</label>
+                    <input type="text" class="form-input" placeholder="City, café, park, anywhere..." required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">📅 What date works for you?</label>
+                    <input type="date" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">⏰ What time should I arrive?</label>
+                    <input type="time" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">🍽️ What are we eating first?</label>
+                    <input type="text" class="form-input" placeholder="Your favorite food..." required>
+                </div>
+            </form>
+
+            <p class="message" style="margin-top: 30px; font-weight: 600; color: var(--dark-pink);">
+                Or, if you're ready to hear my voice right now, just skip the form and call the mastermind:
+            </p>
+
+            <div class="contact-box">
+                <div class="contact-item">📞 Call / WhatsApp: <strong>1234577890</strong></div>
             </div>
-            <p class="message" style="font-weight: 700; color: var(--dark-pink);">
-                I'm waiting for your transmission, pick up! 🚀
-            </p>
-            <button class="btn" onclick="nextPage(7, 1)">Restart Mission 🔄</button>
+
+            <button class="btn" onclick="nextPage(6, 7)">Submit & Read My Final Message 💌</button>
+        </div>
+
+        <!-- Page 7: The Final Descent -->
+        <div class="page" id="page7">
+            <div class="emoji-icon">🌙✨</div>
+            <h1>Forever in Your Orbit.</h1>
+            <div class="final-message">
+                <p class="final-message-text">
+                    You've made it to the end of the sky. There's no turning back now, and I'm never letting you go again.
+                </p>
+                <br>
+                <p>
+                    Happy Birthday, my beautiful, sensitive moon-gazer. Thank you for letting me back into your world, even if it's just a little bit for now. May your dreams tonight be as soft as the clouds, and may you always know that no matter how dark the night gets, you belong to me, and my heart is always shining directly on you.
+                </p>
+                <br>
+                <p style="font-weight: 700; color: var(--dark-pink); font-size: 1.2rem;">
+                    Eat well, sleep tight, and I cannot wait to see you soon. 🤍☁️
+                </p>
+            </div>
         </div>
     </div>
 
@@ -447,10 +494,10 @@
         // Create Starfield
         function createStars() {
             const starfield = document.getElementById('starfield');
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 120; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star');
-                star.style.width = Math.random() * 3 + 'px';
+                star.style.width = Math.random() * 2.5 + 'px';
                 star.style.height = star.style.width;
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
@@ -461,63 +508,32 @@
 
         createStars();
 
-        // Floating Emojis
-        const emojis = ['🌙', '⭐', '🚀', '💫', '✨', '❤️', '🌟', '💖', '🎁'];
-        const emojiContainer = document.getElementById('emoji-container');
+        // Floating Clouds
+        const clouds = ['☁️', '🌥️', '⛅'];
+        const cloudContainer = document.getElementById('cloud-container');
 
-        function createFloatingEmoji() {
-            const emoji = document.createElement('div');
-            emoji.classList.add('emoji-float');
-            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-            emoji.style.left = Math.random() * 100 + '%';
-            emoji.style.animationDuration = (Math.random() * 4 + 6) + 's';
-            emoji.style.animationDelay = Math.random() * 2 + 's';
+        function createFloatingCloud() {
+            const cloud = document.createElement('div');
+            cloud.classList.add('cloud-float');
+            cloud.innerText = clouds[Math.floor(Math.random() * clouds.length)];
+            cloud.style.top = Math.random() * 60 + '%';
+            cloud.style.animationDuration = (Math.random() * 8 + 12) + 's';
+            cloud.style.animationDelay = Math.random() * 3 + 's';
 
-            emojiContainer.appendChild(emoji);
+            cloudContainer.appendChild(cloud);
 
-            setTimeout(() => emoji.remove(), 12000);
+            setTimeout(() => cloud.remove(), 22000);
         }
 
-        setInterval(createFloatingEmoji, 800);
+        setInterval(createFloatingCloud, 2000);
 
-        // Time Display
-        function updateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('en-US', {
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: true
-            });
-            document.getElementById('current-time').innerText = timeString;
-
-            const unlockBtn = document.getElementById('unlock-btn');
-            const lockStatusText = document.getElementById('lock-status-text');
-
-            // You can customize this check - currently allows anytime for demo
-            // To restrict to actual birthday, modify the condition
-            unlockBtn.disabled = false;
-            lockStatusText.innerHTML = '🔓 Ready to unlock!';
-        }
-
-        updateTime();
-        setInterval(updateTime, 1000);
-
-        // Unlock Surprise
-        function unlockSurprise() {
-            showPage(2);
-        }
-
-        // Show Error Page
-        function showError() {
-            showPage('5_5');
+        // Trap Choice Function
+        function trapChoice() {
+            showPage('4_5');
         }
 
         // Navigate Pages
         function nextPage(currentPage, nextPage) {
-            if (nextPage > 7) {
-                nextPage = 1;
-            }
             showPage(nextPage);
         }
 
@@ -532,6 +548,15 @@
 
             // Scroll to top
             window.scrollTo(0, 0);
+        }
+
+        // Form submission (for future backend integration)
+        const form = document.getElementById('meetup-form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Form data can be sent to backend or just proceed
+            });
         }
     </script>
 </body>
