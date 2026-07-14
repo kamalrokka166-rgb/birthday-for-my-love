@@ -1,404 +1,340 @@
-<!DOCTYPE html>  
-<html lang="en">  
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>Happy Birthday, My Love! 💖</title>  
-    <style>  
-        :root {  
-            --primary-pink: #ff758c;  
-            --secondary-pink: #ff7eb3;  
-            --dark-pink: #e0526c;  
-            --bg-color: #fff5f7;  
-            --text-color: #4a4a4a;  
-        }  
-  
-        * {  
-            box-sizing: border-box;  
-            margin: 0;  
-            padding: 0;  
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
-        }  
-  
-        body {  
-            background-color: var(--bg-color);  
-            color: var(--text-color);  
-            overflow-x: hidden;  
-            text-align: center;  
-            position: relative;  
-        }  
-  
-        /* Floating Hearts Background */  
-        .hearts-bg {  
-            position: fixed;  
-            top: 0;  
-            left: 0;  
-            width: 100%;  
-            height: 100%;  
-            z-index: -1;  
-            pointer-events: none;  
-        }  
-  
-        .heart {  
-            position: absolute;  
-            font-size: 20px;  
-            color: var(--primary-pink);  
-            opacity: 0.6;  
-            animation: floatUp 6s linear infinite;  
-        }  
-  
-        @keyframes floatUp {  
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }  
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }  
-        }  
-  
-        /* Container & Sections */  
-        .container {  
-            max-width: 800px;  
-            margin: 0 auto;  
-            padding: 40px 20px;  
-        }  
-  
-        section {  
-            background: white;  
-            border-radius: 20px;  
-            padding: 30px;  
-            margin-bottom: 40px;  
-            box-shadow: 0 10px 30px rgba(255, 117, 140, 0.1);  
-            transition: transform 0.3s;  
-        }  
-  
-        section:hover {  
-            transform: translateY(-5px);  
-        }  
-  
-        h1 {  
-            color: var(--dark-pink);  
-            font-size: 2.5rem;  
-            margin-bottom: 10px;  
-        }  
-  
-        h2 {  
-            color: var(--dark-pink);  
-            margin-bottom: 15px;  
-        }  
-  
-        .subtitle {  
-            font-style: italic;  
-            color: #888;  
-            margin-bottom: 30px;  
-        }  
-  
-        /* Interactive Cake */  
-        .cake-container {  
-            position: relative;  
-            width: 200px;  
-            height: 200px;  
-            margin: 0 auto 20px auto;  
-            cursor: pointer;  
-        }  
-  
-        .cake {  
-            position: absolute;  
-            bottom: 0;  
-            width: 200px;  
-            height: 120px;  
-            background: #f1c40f;  
-            border-radius: 10px 10px 0 0;  
-            box-shadow: inset 0 10px 0 #e67e22;  
-        }  
-  
-        .cake::before {  
-            content: '';  
-            position: absolute;  
-            top: 30px;  
-            left: 0;  
-            width: 100%;  
-            height: 20px;  
-            background: #e74c3c;  
-        }  
-  
-        .candle {  
-            position: absolute;  
-            top: 50px;  
-            left: 95px;  
-            width: 12px;  
-            height: 40px;  
-            background: #3498db;  
-            border-radius: 3px;  
-        }  
-  
-        .flame {  
-            position: absolute;  
-            top: -15px;  
-            left: 2px;  
-            width: 8px;  
-            height: 15px;  
-            background: #e67e22;  
-            border-radius: 50%;  
-            box-shadow: 0 0 10px #f1c40f;  
-            animation: flicker 0.5s infinite alternate;  
-        }  
-  
-        @keyframes flicker {  
-            0% { transform: scale(1); }  
-            100% { transform: scale(1.2); }  
-        }  
-  
-        /* Scratch Card */  
-        .scratch-container {  
-            position: relative;  
-            width: 300px;  
-            height: 150px;  
-            margin: 20px auto;  
-            border-radius: 15px;  
-            overflow: hidden;  
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);  
-        }  
-  
-        .secret-message {  
-            position: absolute;  
-            width: 100%;  
-            height: 100%;  
-            background: #fff;  
-            display: flex;  
-            align-items: center;  
-            justify-content: center;  
-            padding: 20px;  
-            font-weight: bold;  
-            color: var(--dark-pink);  
-            font-size: 1.1rem;  
-        }  
-  
-        canvas {  
-            position: absolute;  
-            top: 0;  
-            left: 0;  
-            cursor: crosshair;  
-            touch-action: none;  
-        }  
-  
-        /* Photo Gallery */  
-        .gallery {  
-            display: flex;  
-            justify-content: center;  
-            gap: 20px;  
-            flex-wrap: wrap;  
-            margin-top: 20px;  
-        }  
-  
-        .polaroid {  
-            background: white;  
-            padding: 15px;  
-            padding-bottom: 30px;  
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);  
-            transform: rotate(-3deg);  
-            transition: transform 0.3s;  
-            max-width: 220px;  
-        }  
-  
-        .polaroid:nth-child(even) {  
-            transform: rotate(4deg);  
-        }  
-  
-        .polaroid:hover {  
-            transform: rotate(0deg) scale(1.05);  
-            z-index: 10;  
-        }  
-  
-        .polaroid img {  
-            width: 100%;  
-            height: 180px;  
-            object-fit: cover;  
-            border: 1px solid #ddd;  
-        }  
-  
-        .polaroid .caption {  
-            margin-top: 15px;  
-            font-family: 'Courier New', Courier, monospace;  
-            font-weight: bold;  
-            font-size: 0.9rem;  
-        }  
-  
-        /* Wish Button */  
-        .btn {  
-            background: linear-gradient(to right, var(--primary-pink), var(--secondary-pink));  
-            color: white;  
-            border: none;  
-            padding: 15px 35px;  
-            font-size: 1.1rem;  
-            border-radius: 50px;  
-            cursor: pointer;  
-            box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);  
-            margin-top: 20px;  
-            transition: transform 0.2s, box-shadow 0.2s;  
-        }  
-  
-        .btn:hover {  
-            transform: scale(1.05);  
-            box-shadow: 0 8px 20px rgba(255, 117, 140, 0.6);  
-        }  
-  
-        #wish-text {  
-            margin-top: 20px;  
-            font-size: 1.2rem;  
-            font-weight: 600;  
-            color: var(--dark-pink);  
-            min-height: 30px;  
-        }  
-    </style>  
-</head>  
-<body>  
-  
-    <div class="hearts-bg" id="hearts-container"></div>  
-  
-    <div class="container">  
-        <!-- Header Section -->  
-        <section>  
-            <h1>Happy Birthday, Beautiful! 🎂✨</h1>  
-            <p class="subtitle">Miles apart, but always close at heart.</p>  
-              
-            <!-- Virtual Cake -->  
-            <div class="cake-container" onclick="blowCandle()">  
-                <div class="candle">  
-                    <div class="flame" id="cake-flame"></div>  
-                </div>  
-                <div class="cake"></div>  
-            </div>  
-            <p id="cake-instruction">Click the flame to make a wish and blow out the candle! 🕯️</p>  
-        </section>  
-  
-        <!-- Scratch Card Surprise -->  
-        <section>  
-            <h2>A Little Surprise For You 🤔</h2>  
-            <p style="margin-bottom: 15px; color: #666;">Scratch the silver box below to reveal a secret note...</p>  
-            <div class="scratch-container">  
-                <div class="secret-message">  
-                    "Distance means so little when someone means so much. Counting down the days until I hold you. I love you!" ❤️  
-                </div>  
-                <canvas id="scratch-canvas" width="300" height="150"></canvas>  
-            </div>  
-        </section>  
-  
-        <!-- Memory Lane / Gallery -->  
-        <section>  
-            <h2>Our Favorite Moments 📸</h2>  
-            <p style="color: #666; margin-bottom: 20px;">Some memories to remind you how much you mean to me.</p>  
-            <div class="gallery">  
-                <!-- Replace 'https://via.placeholder.com/200' with URLs of your own photos -->  
-                <div class="polaroid">  
-                    <img src="https://via.placeholder.com/200" alt="Memory 1">  
-                    <div class="caption">That late night call 🥰</div>  
-                </div>  
-                <div class="polaroid">  
-                    <img src="https://via.placeholder.com/200" alt="Memory 2">  
-                    <div class="caption">My absolute favorite smile 😍</div>  
-                </div>  
-                <div class="polaroid">  
-                    <img src="https://via.placeholder.com/200" alt="Memory 3">  
-                    <div class="caption">Soon together... ✈️❤️</div>  
-                </div>  
-            </div>  
-        </section>  
-  
-        <!-- Infinite Love Generator -->  
-        <section>  
-            <h2>Need a Reminder? 💌</h2>  
-            <p style="color: #666;">Whenever you miss me, click this button to see how much I adore you.</p>  
-            <button class="btn" onclick="generateWish()">Click Me!</button>  
-            <p id="wish-text"></p>  
-        </section>  
-    </div>  
-  
-    <script>  
-        // 1. Floating Hearts Background Setup  
-        const heartsContainer = document.getElementById('hearts-container');  
-        const heartIcons = ['❤️', '💖', '💝', '💕', '🌸'];  
-          
-        function createHeart() {  
-            const heart = document.createElement('div');  
-            heart.classList.add('heart');  
-            heart.innerText = heartIcons[Math.floor(Math.random() * heartIcons.length)];  
-            heart.style.left = Math.random() * 100 + 'vw';  
-            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';   
-            heart.style.fontSize = (Math.random() * 15 + 15) + 'px';  
-              
-            heartsContainer.appendChild(heart);  
-              
-            setTimeout(() => {  
-                heart.remove();  
-            }, 6000);  
-        }  
-        setInterval(createHeart, 300);  
-  
-        // 2. Interactive Candle Blowing  
-        function blowCandle() {  
-            const flame = document.getElementById('cake-flame');  
-            const instruction = document.getElementById('cake-instruction');  
-            flame.style.display = 'none';  
-            instruction.innerHTML = "🎉 Wish received! May all your dreams come true, my love! 🎉";  
-        }  
-  
-        // 3. Scratch Card Functionality  
-        const canvas = document.getElementById('scratch-canvas');  
-        const ctx = canvas.getContext('2d');  
-        let isDrawing = false;  
-  
-        // Fill canvas with silver color  
-        ctx.fillStyle = '#cccccc';  
-        ctx.fillRect(0, 0, canvas.width, canvas.height);  
-          
-        // Add overlay text on the scratch surface  
-        ctx.fillStyle = '#666666';  
-        ctx.font = '16px sans-serif';  
-        ctx.textAlign = 'center';  
-        ctx.fillText('Scratch here with your mouse/finger!', canvas.width / 2, canvas.height / 2 + 5);  
-  
-        function scratch(e) {  
-            if (!isDrawing) return;  
-              
-            // Handle both touch and mouse positions  
-            const rect = canvas.getBoundingClientRect();  
-            const x = (e.clientX || e.touches[0].clientX) - rect.left;  
-            const y = (e.clientY || e.touches[0].clientY) - rect.top;  
-  
-            ctx.globalCompositeOperation = 'destination-out';  
-            ctx.beginPath();  
-            ctx.arc(x, y, 20, 0, Math.PI * 2);  
-            ctx.fill();  
-        }  
-  
-        // Mouse events  
-        canvas.addEventListener('mousedown', () => isDrawing = true);  
-        canvas.addEventListener('mouseup', () => isDrawing = false);  
-        canvas.addEventListener('mousemove', scratch);  
-  
-        // Touch events for mobile  
-        canvas.addEventListener('touchstart', () => isDrawing = true);  
-        canvas.addEventListener('touchend', () => isDrawing = false);  
-        canvas.addEventListener('touchmove', scratch);  
-  
-        // 4. Random Message Generator  
-        const loveMessages = [  
-            "You are my today and all of my tomorrows. 🌹",  
-            "No matter the distance, you're the best thing that ever happened to me. 🌎❤️",  
-            "I love you more than words can express, and I'm so lucky to have you. 💍",  
-            "You make my world brighter just by being in it. Happy Birthday! ✨",  
-            "I miss you crazy amounts, but every single mile is worth it for you. ✈️💖",  
-            "Happy Birthday to the girl who owns my entire heart. 🔒💗"  
-        ];  
-  
-        function generateWish() {  
-            const wishText = document.getElementById('wish-text');  
-            const randomIndex = Math.floor(Math.random() * loveMessages.length);  
-            wishText.style.opacity = 0;  
-              
-            setTimeout(() => {  
-                wishText.innerText = loveMessages[randomIndex];  
-                wishText.style.opacity = 1;  
-                wishText.style.transition = 'opacity 0.4s';  
-            }, 200);  
-        }  
-    </script>  
-</body>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love! 💖</title>
+    <style>
+        :root {
+            --primary-pink: #ff758c;
+            --secondary-pink: #ff7eb3;
+            --dark-pink: #e0526c;
+            --bg-color: #fff5f7;
+            --text-color: #4a4a4a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe0e6 100%);
+            color: var(--text-color);
+            overflow-x: hidden;
+            text-align: center;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Bouncing Emoji Background */
+        .emoji-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.4;
+            animation: bounce 3s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 600px;
+            width: 90%;
+            background: white;
+            border-radius: 30px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 60px rgba(255, 117, 140, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Page Styles */
+        .page {
+            display: none;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .emoji-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        h1 {
+            color: var(--dark-pink);
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        h2 {
+            color: var(--primary-pink);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .message {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .lock-message {
+            font-size: 1rem;
+            color: #666;
+            margin: 30px 0;
+            line-height: 1.7;
+        }
+
+        /* Time Display */
+        .time-display {
+            background: linear-gradient(to right, var(--primary-pink), var(--secondary-pink));
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Buttons */
+        .btn {
+            background: linear-gradient(to right, var(--primary-pink), var(--secondary-pink));
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 117, 140, 0.3);
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 117, 140, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Lock Status */
+        .lock-status {
+            background: #fff0f3;
+            border-left: 4px solid var(--primary-pink);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            color: var(--dark-pink);
+            font-weight: 600;
+        }
+
+        .lock-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 25px;
+                border-radius: 20px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .emoji-icon {
+                font-size: 60px;
+            }
+
+            .message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="emoji-bg" id="emoji-container"></div>
+
+    <div class="container">
+        <!-- Page 1: The Lock Screen -->
+        <div class="page active" id="page1">
+            <div class="emoji-icon">🎁</div>
+            <h1>Open when it is 12:00 AM...</h1>
+            <p class="lock-message">
+                Hey you. If it's officially your birthday, you are allowed to click the button below. No peeking early! 😉
+            </p>
+
+            <div class="time-display">
+                Current Time: <span id="current-time">Loading...</span>
+            </div>
+
+            <div class="lock-status">
+                <div class="lock-icon">🔒</div>
+                <div id="lock-status-text">Not yet! Come back at midnight on your birthday.</div>
+            </div>
+
+            <button class="btn" id="unlock-btn" onclick="unlockSurprise()" disabled>
+                Unlock My Surprise ✨
+            </button>
+        </div>
+
+        <!-- Page 2: The Birthday Wish -->
+        <div class="page" id="page2">
+            <div class="emoji-icon">🎂</div>
+            <h1>Happy Birthday, Beautiful!</h1>
+            <p class="message">
+                Even though we are miles apart, my heart is right there with you today. I hope this birthday brings you as much joy as you bring into my life every single day.
+            </p>
+            <button class="btn" onclick="nextPage(2, 3)">Next Surprise 👉</button>
+        </div>
+
+        <!-- Page 3: The Sweet Note -->
+        <div class="page" id="page3">
+            <div class="emoji-icon">❤️</div>
+            <h2>My Favorite Place...</h2>
+            <p class="message">
+                ...is wherever you are. I'm counting down the days until we don't have to say goodbye at airports anymore. You are my absolute favorite person.
+            </p>
+            <button class="btn" onclick="nextPage(3, 4)">One Last Thing 👉</button>
+        </div>
+
+        <!-- Page 4: The Final Reveal -->
+        <div class="page" id="page4">
+            <div class="emoji-icon">✉️</div>
+            <h2>Now, Check Your Door/Email!</h2>
+            <p class="message">
+                I have a little physical surprise headed your way (or check your inbox!). Once you've opened it, call me. I'm waiting to hear your voice!
+            </p>
+            <button class="btn" onclick="nextPage(4, 1)">Start Over 🔄</button>
+        </div>
+    </div>
+
+    <script>
+        // Bounce Emojis
+        const emojis = ['💖', '🎁', '🎂', '❤️', '✨', '🎉', '💝'];
+        const emojiContainer = document.getElementById('emoji-container');
+
+        function createBounceEmoji() {
+            const emoji = document.createElement('div');
+            emoji.classList.add('emoji');
+            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + '%';
+            emoji.style.top = Math.random() * 100 + '%';
+            emoji.style.animationDelay = Math.random() * 2 + 's';
+            emoji.style.animationDuration = (Math.random() * 2 + 3) + 's';
+
+            emojiContainer.appendChild(emoji);
+
+            setTimeout(() => emoji.remove(), 6000);
+        }
+
+        setInterval(createBounceEmoji, 500);
+
+        // Time Display
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+            document.getElementById('current-time').innerText = timeString;
+
+            // Check if it's midnight or later for birthday
+            const isBirthday = now.getHours() >= 0 && now.getHours() < 24;
+            const unlockBtn = document.getElementById('unlock-btn');
+            const lockStatusText = document.getElementById('lock-status-text');
+
+            // You can customize this check - currently allows anytime for demo
+            // To restrict to actual birthday, modify the condition
+            unlockBtn.disabled = false;
+            lockStatusText.innerHTML = '🔓 Ready to unlock!';
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // Unlock Surprise
+        function unlockSurprise() {
+            showPage(2);
+        }
+
+        // Navigate Pages
+        function nextPage(currentPage, nextPage) {
+            if (nextPage > 4) {
+                nextPage = 1;
+            }
+            showPage(nextPage);
+        }
+
+        function showPage(pageNum) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show selected page
+            document.getElementById('page' + pageNum).classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
 </html>
