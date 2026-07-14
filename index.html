@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, My Love! 💖</title>
+    <title>Happy Birthday, My Love! 🌙</title>
     <style>
         :root {
             --primary-pink: #ff758c;
             --secondary-pink: #ff7eb3;
             --dark-pink: #e0526c;
-            --bg-color: #fff5f7;
+            --moon-blue: #1a1a2e;
+            --star-yellow: #ffd700;
             --text-color: #4a4a4a;
         }
 
@@ -21,7 +22,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #fff5f7 0%, #ffe0e6 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             color: var(--text-color);
             overflow-x: hidden;
             text-align: center;
@@ -32,39 +33,55 @@
             justify-content: center;
         }
 
-        /* Bouncing Emoji Background */
-        .emoji-bg {
+        /* Starfield Background */
+        .starfield {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 1;
             pointer-events: none;
         }
 
-        .emoji {
+        .star {
             position: absolute;
-            font-size: 40px;
-            opacity: 0.4;
-            animation: bounce 3s ease-in-out infinite;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(10deg); }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Floating Emoji */
+        .emoji-float {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.6;
+            animation: floatUp 8s ease-in infinite;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0.6; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
         }
 
         /* Main Container */
         .container {
             max-width: 600px;
             width: 90%;
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 30px;
             padding: 60px 40px;
-            box-shadow: 0 20px 60px rgba(255, 117, 140, 0.2);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.2);
             position: relative;
             z-index: 10;
+            border: 2px solid var(--star-yellow);
         }
 
         /* Page Styles */
@@ -108,7 +125,7 @@
         }
 
         .subtitle {
-            color: #888;
+            color: #666;
             font-size: 0.95rem;
             margin-bottom: 20px;
             line-height: 1.6;
@@ -186,6 +203,23 @@
             color: var(--dark-pink);
             font-size: 1.1rem;
             font-weight: 600;
+            line-height: 1.8;
+        }
+
+        /* Gift Reveal Box */
+        .gift-box {
+            background: linear-gradient(135deg, #ffe0e6 0%, #fff0f3 100%);
+            border: 3px solid var(--primary-pink);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(255, 117, 140, 0.2);
+        }
+
+        .gift-text {
+            color: var(--dark-pink);
+            font-size: 1.2rem;
+            font-weight: 700;
             line-height: 1.8;
         }
 
@@ -276,16 +310,19 @@
     </style>
 </head>
 <body>
-    <div class="emoji-bg" id="emoji-container"></div>
+    <div class="starfield" id="starfield"></div>
+    <div id="emoji-container"></div>
 
     <div class="container">
-        <!-- Page 1: The Gatekeeper -->
+        <!-- Page 1: Entering Orbit -->
         <div class="page active" id="page1">
-            <div class="emoji-icon">🛑</div>
-            <h1>HOLD UP.</h1>
-            <h2>Access Denied... Unless it's 12:00 AM.</h2>
+            <div class="emoji-icon">🚀</div>
+            <h1>Mission Control: Birthday Verification</h1>
             <p class="lock-message">
-                If you are opening this early, I will literally know. Don't ruin the hype. If it's officially your birthday, click below to verify you aren't cheating. 😉
+                You are trying to enter a highly classified celestial zone. Access is strictly denied unless it is officially 12:00 AM on your birthday.
+            </p>
+            <p class="lock-message">
+                Scan your birthday vibes below to proceed. No cheating.
             </p>
 
             <div class="time-display">
@@ -298,126 +335,150 @@
             </div>
 
             <button class="btn" id="unlock-btn" onclick="unlockSurprise()" disabled>
-                VERIFY: I am officially older now 🔓
+                Initiate Launch Sequence 🔓
             </button>
         </div>
 
-        <!-- Page 2: The Level Up -->
+        <!-- Page 2: The New Lunar Cycle -->
         <div class="page" id="page2">
-            <div class="emoji-icon">👑</div>
-            <h1>Level Unlocked!</h1>
+            <div class="emoji-icon">🌙</div>
+            <h1>Happy Birthday to my favorite human on earth!</h1>
             <p class="message">
-                Happy Birthday! You officially survived another year of dealing with me. Honestly, that deserves a trophy by itself. Hope your day is absolute peak energy.
+                You officially survived another year of dealing with me. That alone should earn you an astronaut medal. I hope your day is completely out of this world.
             </p>
-            <button class="btn" onclick="nextPage(2, 3)">Claim Daily Rewards 👉</button>
+            <button class="btn" onclick="nextPage(2, 3)">Request Space Supplies 👉</button>
         </div>
 
-        <!-- Page 3: The Callout -->
+        <!-- Page 3: The Gravity Check -->
         <div class="page" id="page3">
             <div class="emoji-icon">🎙️</div>
-            <h2>Late Night VIP</h2>
+            <h2>Talking to the Moon? Nah, Talking to You.</h2>
             <p class="message">
-                Distance is trash, but honestly, there is nobody else I'd rather fall asleep on a call with or carry in-game (okay, maybe you carry me sometimes). From all the random screen shares to the absolute brain rot inside jokes we have, you're my favorite person to do absolutely nothing with.
+                Distance is trash, but honestly, gravity just works differently with us. Even though we are miles apart under the same sky, you're the only person I'd willingly lose sleep for during our endless late-night calls.
             </p>
-            <button class="btn" onclick="nextPage(3, 4)">See the Stats 👉</button>
+            <p class="message">
+                You're basically my favorite distraction in the entire universe.
+            </p>
+            <button class="btn" onclick="nextPage(3, 4)">Check the Flight Radar 👉</button>
         </div>
 
-        <!-- Page 4: Why You're Actually Top Tier -->
+        <!-- Page 4: Why You're a Star (Literally) -->
         <div class="page" id="page4">
-            <div class="emoji-icon">🏆</div>
-            <h2>The Leaderboard</h2>
+            <div class="emoji-icon">✨</div>
+            <h2>The Lunar Leaderboard</h2>
             <p class="message">
-                Just a quick reminder of why you're top tier:
+                Just a quick reminder of why you are top tier:
             </p>
             <div class="leaderboard">
-                <div class="leaderboard-item">🔥 Your laugh (even when you're laughing at me, not with me).</div>
-                <div class="leaderboard-item">🔥 You actually match my energy and don't tell me to shut up.</div>
-                <div class="leaderboard-item">🔥 You're the absolute prettiest distraction in my life.</div>
-                <div class="leaderboard-item">🔥 You're just genuinely my best friend.</div>
+                <div class="leaderboard-item">🌕 You actually match my energy and haven't blocked me yet.</div>
+                <div class="leaderboard-item">🌖 Your laugh (even when you're roasting my terrible jokes).</div>
+                <div class="leaderboard-item">🌗 You are easily the prettiest view in the galaxy.</div>
+                <div class="leaderboard-item">🌘 You're genuinely my absolute best friend.</div>
             </div>
-            <button class="btn" onclick="nextPage(4, 5)">Click for the Final Boss 👉</button>
+            <button class="btn" onclick="nextPage(4, 5)">Travel to the Dark Side of the Moon 👉</button>
         </div>
 
-        <!-- Page 5: The "IOU" Date -->
+        <!-- Page 5: The Crew Evaluation -->
         <div class="page" id="page5">
-            <div class="emoji-icon">🥞</div>
-            <h2>The Real-Life Voucher</h2>
-            <p class="message">
-                Since I can't physically hand you a slice of cake right now without it getting ruined in transit, this page is a legally binding contract. Next time we link up, the massive dessert/dinner date is 100% on my tab. No arguments.
-            </p>
-            <button class="btn" onclick="nextPage(5, 6)">Next Step 👉</button>
-        </div>
-
-        <!-- Page 6: The Test -->
-        <div class="page" id="page6">
             <div class="emoji-icon">🤔</div>
             <h2>Moment of Truth...</h2>
             <p class="message">
-                Be honest. Do you actually like this website surprise so far? Choose wisely.
+                Be honest. Are you actually enjoying this moon-themed surprise so far? Think carefully before you click.
             </p>
             <div class="button-container">
-                <button class="btn btn-alt" onclick="nextPage(6, 7)">Yes, I love it! 😍</button>
+                <button class="btn btn-alt" onclick="nextPage(5, 6)">Yes, I love it! 😍</button>
                 <button class="btn btn-alt" onclick="showError()">No, it's mid 🥱</button>
             </div>
         </div>
 
-        <!-- Page 6.5: The Force Reset -->
-        <div class="page" id="page6_5">
+        <!-- Page 5.5: System Override -->
+        <div class="page" id="page5_5">
             <div class="emoji-icon">🛑</div>
-            <h2>ERROR 404: Option Not Found</h2>
+            <h2>ERROR 404: Gravity Failure</h2>
             <div class="error-box">
                 <p class="error-text">
-                    Nice try, but nope!<br><br>
-                    You don't get a choice here. You have to like this website, and honestly, you have to like the person who made it for you too. The system has automatically corrected your mistake.
+                    System Error!<br><br>
+                    Nice try, but that option does not exist in this galaxy. You have to like this website, and honestly, you have to like the astronaut who built it for you too.<br><br>
+                    The system has automatically fixed your incorrect choice. Try again:
                 </p>
             </div>
-            <p style="margin-top: 20px; color: #666;">Try again.</p>
             <div class="button-container">
-                <button class="btn btn-alt" onclick="nextPage(6, 7)">Yes, I love it! 😍</button>
-                <button class="btn btn-alt" onclick="nextPage(6, 7)">Yes, he's the best 🐐</button>
+                <button class="btn btn-alt" onclick="nextPage(5, 6)">Yes, I love it! 😍</button>
+                <button class="btn btn-alt" onclick="nextPage(5, 6)">Yes, he's the best in the universe 🐐</button>
             </div>
         </div>
 
-        <!-- Page 7: The Final Drop & Contact Details -->
-        <div class="page" id="page7">
-            <div class="emoji-icon">📦</div>
-            <h2>Check the Loot Drop!</h2>
+        <!-- Page 6: The Ultimate Loot Drop -->
+        <div class="page" id="page6">
+            <div class="emoji-icon">🎁</div>
+            <h2>The Real Gift...</h2>
             <p class="message">
-                Alright, enough scrolling. Go check your doorstep, your email, or your messages right now. I left a little real-world loot drop waiting for you.
+                You might be looking around your room or checking your email for a gift drop right now... but you won't find it there.
             </p>
+            <div class="gift-box">
+                <p class="gift-text">
+                    Because the real gift isn't something I can mail. The gift is me coming to see you in person. ✈️❤️
+                </p>
+            </div>
             <p class="message">
-                Once you open it, you are legally required to report back to base immediately. Contact the mastermind who made this happen:
+                The countdown to our next link-up starts right now. Prepare for arrival!
+            </p>
+            <button class="btn" onclick="nextPage(6, 7)">Secure Your Arrival Date 📲</button>
+        </div>
+
+        <!-- Page 7: Final Landing -->
+        <div class="page" id="page7">
+            <div class="emoji-icon">📞</div>
+            <h2>Report Back to Base</h2>
+            <p class="message">
+                You are legally required to contact the mastermind behind this space mission immediately to claim your in-person hug:
             </p>
             <div class="contact-details">
-                <div class="contact-item">📞 Call/WhatsApp: <strong>1234577890</strong></div>
+                <div class="contact-item">📱 Call/WhatsApp: <strong>1234577890</strong></div>
             </div>
             <p class="message" style="font-weight: 700; color: var(--dark-pink);">
-                I'm waiting, pick up! 📲
+                I'm waiting for your transmission, pick up! 🚀
             </p>
-            <button class="btn" onclick="nextPage(7, 1)">GG, Play Again 🔄</button>
+            <button class="btn" onclick="nextPage(7, 1)">Restart Mission 🔄</button>
         </div>
     </div>
 
     <script>
-        // Bounce Emojis
-        const emojis = ['💖', '🎁', '🎂', '❤️', '✨', '🎉', '💝', '👑', '🏆', '🥞'];
+        // Create Starfield
+        function createStars() {
+            const starfield = document.getElementById('starfield');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starfield.appendChild(star);
+            }
+        }
+
+        createStars();
+
+        // Floating Emojis
+        const emojis = ['🌙', '⭐', '🚀', '💫', '✨', '❤️', '🌟', '💖', '🎁'];
         const emojiContainer = document.getElementById('emoji-container');
 
-        function createBounceEmoji() {
+        function createFloatingEmoji() {
             const emoji = document.createElement('div');
-            emoji.classList.add('emoji');
+            emoji.classList.add('emoji-float');
             emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
             emoji.style.left = Math.random() * 100 + '%';
-            emoji.style.top = Math.random() * 100 + '%';
+            emoji.style.animationDuration = (Math.random() * 4 + 6) + 's';
             emoji.style.animationDelay = Math.random() * 2 + 's';
-            emoji.style.animationDuration = (Math.random() * 2 + 3) + 's';
 
             emojiContainer.appendChild(emoji);
 
-            setTimeout(() => emoji.remove(), 6000);
+            setTimeout(() => emoji.remove(), 12000);
         }
 
-        setInterval(createBounceEmoji, 500);
+        setInterval(createFloatingEmoji, 800);
 
         // Time Display
         function updateTime() {
@@ -430,7 +491,6 @@
             });
             document.getElementById('current-time').innerText = timeString;
 
-            // Check if it's midnight or later for birthday
             const unlockBtn = document.getElementById('unlock-btn');
             const lockStatusText = document.getElementById('lock-status-text');
 
@@ -450,7 +510,7 @@
 
         // Show Error Page
         function showError() {
-            showPage('6_5');
+            showPage('5_5');
         }
 
         // Navigate Pages
