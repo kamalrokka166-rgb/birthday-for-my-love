@@ -12,6 +12,8 @@
             --moon-blue: #1a1a2e;
             --cloud-white: #f5f5ff;
             --text-color: #4a4a4a;
+            --love-red: #ff1744;
+            --soft-red: #ff6b9d;
         }
 
         * {
@@ -22,7 +24,9 @@
         }
 
         body {
-            background: linear-gradient(180deg, #0f0f1e 0%, #1a1a3e 50%, #2d1b69 100%);
+            background: linear-gradient(135deg, #ff1744 0%, #ff6b9d 25%, #ff758c 50%, #e0526c 75%, #c0405c 100%);
+            background-size: 400% 400%;
+            animation: loveGradient 15s ease infinite;
             color: var(--text-color);
             overflow-x: hidden;
             text-align: center;
@@ -33,8 +37,14 @@
             justify-content: center;
         }
 
-        /* Starfield Background */
-        .starfield {
+        @keyframes loveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Hearts Background */
+        .hearts-bg {
             position: fixed;
             top: 0;
             left: 0;
@@ -42,47 +52,54 @@
             height: 100%;
             z-index: 1;
             pointer-events: none;
+            overflow: hidden;
         }
 
-        .star {
+        .heart {
             position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s ease-in-out infinite;
+            font-size: 30px;
+            opacity: 0.3;
+            animation: floatHeart 8s ease-in infinite;
         }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 1; }
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px) rotate(360deg);
+                opacity: 0;
+            }
         }
 
-        /* Floating Clouds */
-        .cloud-float {
+        /* Sparkles */
+        .sparkle {
             position: absolute;
-            font-size: 60px;
-            opacity: 0.5;
-            animation: float 15s ease-in-out infinite;
-            z-index: 2;
-            pointer-events: none;
+            font-size: 20px;
+            opacity: 0.4;
+            animation: sparkleFloat 6s ease-in-out infinite;
         }
 
-        @keyframes float {
-            0% { transform: translateX(-100vw) translateY(0); opacity: 0.3; }
-            50% { opacity: 0.6; }
-            100% { transform: translateX(100vw) translateY(-50px); opacity: 0.3; }
+        @keyframes sparkleFloat {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+            50% { transform: scale(1.3) rotate(180deg); opacity: 0.8; }
         }
 
         /* Main Container */
         .container {
             max-width: 650px;
             width: 90%;
-            background: rgba(255, 255, 255, 0.97);
+            background: rgba(255, 255, 255, 0.98);
             border-radius: 30px;
             padding: 60px 40px;
-            box-shadow: 0 20px 80px rgba(255, 117, 140, 0.25);
+            box-shadow: 0 20px 80px rgba(255, 23, 68, 0.4);
             position: relative;
             z-index: 10;
-            border: 2px solid rgba(255, 117, 140, 0.3);
+            border: 3px solid var(--primary-pink);
         }
 
         /* Page Styles */
@@ -149,9 +166,28 @@
             font-weight: 600;
         }
 
+        /* Countdown Timer */
+        .countdown-box {
+            background: linear-gradient(135deg, #ff1744 0%, #ff6b9d 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(255, 23, 68, 0.3);
+        }
+
+        .countdown-timer {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 15px 0;
+            letter-spacing: 2px;
+        }
+
         /* Special Boxes */
         .decree-box {
-            background: linear-gradient(135deg, #fff0f3 0%, #fffaf0 100%);
+            background: linear-gradient(135deg, #fff0f3 0%, #ffe0e6 100%);
             border-left: 5px solid var(--primary-pink);
             border-radius: 15px;
             padding: 25px;
@@ -172,7 +208,7 @@
             border-radius: 20px;
             padding: 30px;
             margin: 25px 0;
-            box-shadow: 0 10px 30px rgba(255, 117, 140, 0.15);
+            box-shadow: 0 10px 30px rgba(255, 117, 140, 0.25);
         }
 
         .gift-text {
@@ -188,7 +224,7 @@
             border-radius: 20px;
             padding: 30px;
             margin: 25px 0;
-            box-shadow: 0 10px 30px rgba(255, 117, 140, 0.2);
+            box-shadow: 0 10px 30px rgba(255, 117, 140, 0.3);
         }
 
         .error-text {
@@ -226,15 +262,16 @@
         .form-input:focus {
             outline: none;
             border-color: var(--dark-pink);
-            box-shadow: 0 0 10px rgba(255, 117, 140, 0.3);
+            box-shadow: 0 0 10px rgba(255, 117, 140, 0.4);
         }
 
         .contact-box {
-            background: #f9f0f2;
+            background: linear-gradient(135deg, #fff0f3 0%, #ffe0e6 100%);
             border-radius: 15px;
             padding: 20px;
             margin: 20px 0;
             text-align: center;
+            border: 2px solid var(--primary-pink);
         }
 
         .contact-item {
@@ -246,14 +283,14 @@
 
         /* Buttons */
         .btn {
-            background: linear-gradient(to right, var(--primary-pink), var(--secondary-pink));
+            background: linear-gradient(to right, #ff1744, #ff6b9d);
             color: white;
             border: none;
             padding: 16px 40px;
             font-size: 1.1rem;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 8px 25px rgba(255, 117, 140, 0.35);
+            box-shadow: 0 8px 25px rgba(255, 23, 68, 0.4);
             margin-top: 25px;
             transition: all 0.3s ease;
             font-weight: 700;
@@ -262,7 +299,7 @@
 
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(255, 117, 140, 0.5);
+            box-shadow: 0 12px 35px rgba(255, 23, 68, 0.5);
         }
 
         .btn:active {
@@ -285,19 +322,20 @@
 
         /* Final Page Styling */
         .final-message {
-            background: linear-gradient(135deg, #fff0f3 0%, #fffaf0 100%);
+            background: linear-gradient(135deg, #fff0f3 0%, #ffe0e6 100%);
             border-radius: 20px;
             padding: 40px;
             margin: 30px 0;
-            border: 2px solid var(--primary-pink);
+            border: 3px solid var(--primary-pink);
             line-height: 2;
             font-size: 1.05rem;
             color: var(--text-color);
+            box-shadow: 0 10px 30px rgba(255, 117, 140, 0.25);
         }
 
         .final-message-text {
             color: var(--dark-pink);
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1.15rem;
         }
 
@@ -342,194 +380,223 @@
     </style>
 </head>
 <body>
-    <div class="starfield" id="starfield"></div>
-    <div id="cloud-container"></div>
+    <div class="hearts-bg" id="hearts-container"></div>
 
     <div class="container">
-        <!-- Page 1: Entering Orbit -->
+        <!-- Page 1: The Celestial Lock -->
         <div class="page active" id="page1">
             <div class="emoji-icon">🌌</div>
-            <h1>Connection Request... 📡</h1>
+            <h1>Mission Control: Security Clearance 📡</h1>
+            
+            <div class="countdown-box">
+                <div>System Status: Locked until July 19th at 12:00 AM ⏱️</div>
+                <div class="countdown-timer" id="countdown">Loading...</div>
+            </div>
+
             <p class="message">
-                I know it has been about 6 months since my signal went dark. I know the sky has been quiet, and I know you might be hurt or angry. But tonight, the moon brought me back to you. I couldn't let your day pass without trying to re-enter your orbit.
+                You are trying to access a highly classified, ultra-romantic celestial zone. No early peeking allowed, beautiful, the countdown is ticking.
             </p>
-            <p class="message">
-                If you're willing to drift through the clouds with me for just a few minutes, click below.
+
+            <p style="color: var(--dark-pink); font-weight: 700; font-size: 1.05rem; margin: 20px 0;">
+                ⚠️ ATTENTION: Please read everything carefully and make sure you choose the correct option to proceed!
             </p>
-            <button class="btn" onclick="nextPage(1, 2)">Walk through the clouds ☁️</button>
+
+            <button class="btn" id="unlock-btn" onclick="unlockSurprise()" disabled>
+                Access Orbit 🔓
+            </button>
         </div>
 
-        <!-- Page 2: The Soft Claim -->
+        <!-- Page 2: Re-entering Your Orbit -->
         <div class="page" id="page2">
+            <div class="emoji-icon">📡</div>
+            <h1>Signal Restored... Did you miss me? 😉</h1>
+            <p class="message">
+                I know my radar went dark for about 6 months, and I know you've probably been floating out there being mad at me, but the moon completely drew me back to you tonight because I couldn't let my favorite view in the universe celebrate her day without re-entering her orbit.
+            </p>
+            <button class="btn" onclick="nextPage(2, 3)">Walk through the clouds with me ☁️</button>
+        </div>
+
+        <!-- Page 3: The Ultimate Flex -->
+        <div class="page" id="page3">
             <div class="emoji-icon">🌙</div>
             <h1>Happy Birthday to the girl who belongs to me.</h1>
             <p class="message">
-                You officially survived another year of dealing with the universe, but more importantly, another year of being my favorite person. Even though we've had this distance, nobody else gets to claim your heart. I hope your day is as beautiful and peaceful as a midnight sky.
+                You officially survived another year of dealing with the universe, but let's be real—the best part of your year was being mine since distance can try all it wants, but nobody else gets to claim that beautiful heart of yours.
             </p>
-            <button class="btn" onclick="nextPage(2, 3)">Float to the next step ✨</button>
+            <button class="btn" onclick="nextPage(3, 4)">Float a little closer to me ✨</button>
         </div>
 
-        <!-- Page 3: The Cloud Sanctuary -->
-        <div class="page" id="page3">
-            <div class="emoji-icon">☁️🛌</div>
-            <h2>Your Lunar Decrees for Today:</h2>
-            <p class="message">
-                Since you rule this galaxy today, you are officially commanded to:
-            </p>
-            <div class="decree-box">
-                <div class="decree-item">☁️ Sleep in under a blanket of clouds for as long as your heart desires.</div>
-                <div class="decree-item">🍰 Eat every single one of your favorite treats (lunar gravity means birthday calories don't count).</div>
-                <div class="decree-item">🌙 Stare at the moon later and know that someone is looking at the exact same sky, missing you deeply.</div>
-            </div>
-            <button class="btn" onclick="nextPage(3, 4)">Click for a Secret Voucher 🍿</button>
-        </div>
-
-        <!-- Page 4: The Ultimate Trap -->
+        <!-- Page 4: The Cozy Princess Manifest -->
         <div class="page" id="page4">
-            <div class="emoji-icon">🥺</div>
-            <h2>Moment of Truth...</h2>
+            <div class="emoji-icon">☁️🛌</div>
+            <h2>Official Birthday Commands from Your Captain:</h2>
             <p class="message">
-                I know I've been gone for 6 months. I know you're mad. So let's face it—how angry are you actually?
+                Since you literally rule my galaxy today, you are officially ordered to sleep in under a mountain of blankets for as long as your lazy heart desires, eat absolutely everything you see since birthday calories don't count in our orbit, and look at the moon tonight to remember that the guy who is completely crazy about you is looking at it too.
+            </p>
+            <button class="btn" onclick="nextPage(4, 5)">Click to unlock my secret voucher 🍿</button>
+        </div>
+
+        <!-- Page 5: The Master Trap -->
+        <div class="page" id="page5">
+            <div class="emoji-icon">🥺</div>
+            <h2>Time for the Audit...</h2>
+            <p class="message">
+                Look, I know I messed up by being gone for 6 months, and I know you're sensitive and probably want to kick me across the galaxy, so tell me the truth—how mad are you?
             </p>
             <div class="button-container">
                 <button class="btn btn-alt" onclick="trapChoice()">I'm absolutely furious 🤬</button>
-                <button class="btn btn-alt" onclick="trapChoice()">I'm ignoring you 🥞</button>
+                <button class="btn btn-alt" onclick="trapChoice()">I'm ignoring you 😤</button>
             </div>
         </div>
 
-        <!-- Page 4.5: ERROR Timeout -->
-        <div class="page" id="page4_5">
+        <!-- Page 5.5: ERROR Timeout -->
+        <div class="page" id="page5_5">
             <div class="emoji-icon">🛑</div>
             <h2>ERROR: Heartbeat Timeout</h2>
             <div class="error-box">
                 <p class="error-text">
                     Nice try, but you're blocked from staying mad! ☁️<br><br>
-                    Access Denied! The system completely crashed because it refuses to let you be angry on your birthday. You don't get a choice here—the clouds have automatically overridden your attitude.<br><br>
-                    You're stuck with me, and you have to let me make it up to you.
+                    Access Denied because the system completely crashed since it refuses to let you pout on your birthday, meaning you don't get a choice here—the clouds have automatically overridden your attitude, so you're stuck with me, you have to like this website, and honestly, you have to love the guy who made it.
                 </p>
             </div>
             <div class="button-container">
-                <button class="btn btn-alt" onclick="nextPage(4, 5)">Fine, what do you have to say? 🌙</button>
-                <button class="btn btn-alt" onclick="nextPage(4, 5)">Show me the real surprise 🎁</button>
+                <button class="btn btn-alt" onclick="nextPage(5, 6)">Fine, you're off the hook 🌙</button>
+                <button class="btn btn-alt" onclick="nextPage(5, 6)">Show me the real surprise 🎁</button>
             </div>
         </div>
 
-        <!-- Page 5: The Grand Apology -->
-        <div class="page" id="page5">
+        <!-- Page 6: The Plot Twist & Movie Date -->
+        <div class="page" id="page6">
             <div class="emoji-icon">🌌❤️</div>
-            <h2>My Biggest Mistake...</h2>
+            <h2>My Biggest Mistake & The Real Gift...</h2>
             <div class="gift-box">
                 <p class="gift-text">
-                    Leaving you in the dark for 6 months was the biggest mistake I've ever made. I am so deeply sorry for the silence, for the distance, and for making a girl as sensitive and precious as you feel left behind. You deserved better, and I hate that I wasn't there.
+                    Leaving a girl as precious, sensitive, and beautiful as you in the dark for 6 months was the biggest mistake I've ever made and I am so deeply sorry since you deserve the absolute universe, which is why a digital card isn't going to cut it because the real gift is me coming to see you in person.
                 </p>
             </div>
-            <p class="message">
-                A gift in the mail isn't enough to fix this. A website isn't enough. The real gift is me coming to see you in person. I want to stand under the same moon, look into your eyes, and apologize properly.
-            </p>
-            <button class="btn" onclick="nextPage(5, 6)">Claim Your Gift & Plan Our Meetup 🛸</button>
-        </div>
-
-        <!-- Page 6: Meetup Form -->
-        <div class="page" id="page6">
-            <div class="emoji-icon">🗺️</div>
-            <h2>You Call the Shots.</h2>
-            <p class="message">
-                Since I'm coming to see you, you have full control over our reunion. Fill out this landing manifest, take a screenshot, and send it straight to my WhatsApp!
-            </p>
 
             <form id="meetup-form">
                 <div class="form-group">
-                    <label class="form-label">📍 Where do you want to meet?</label>
+                    <label class="form-label">📍 Where are we going for our meetup?</label>
                     <input type="text" class="form-input" placeholder="City, café, park, anywhere..." required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">📅 What date works for you?</label>
+                    <label class="form-label">📅 What date am I picking you up?</label>
                     <input type="date" class="form-input" required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">⏰ What time should I arrive?</label>
-                    <input type="time" class="form-input" required>
+                    <label class="form-label">🍿 Which movie are we watching?</label>
+                    <input type="text" class="form-input" placeholder="Movie name..." required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">🍽️ What are we eating first?</label>
+                    <label class="form-label">🍔 What food am I buying you right after?</label>
                     <input type="text" class="form-input" placeholder="Your favorite food..." required>
                 </div>
             </form>
 
             <p class="message" style="margin-top: 30px; font-weight: 600; color: var(--dark-pink);">
-                Or, if you're ready to hear my voice right now, just skip the form and call the mastermind:
+                Or, if you're ready to hear my voice right now:
             </p>
 
             <div class="contact-box">
                 <div class="contact-item">📞 Call / WhatsApp: <strong>1234577890</strong></div>
             </div>
 
-            <button class="btn" onclick="nextPage(6, 7)">Submit & Read My Final Message 💌</button>
+            <button class="btn" onclick="nextPage(6, 7)">Lock in our date & Read my final note 💌</button>
         </div>
 
-        <!-- Page 7: The Final Descent -->
+        <!-- Page 7: The Eternal Orbit -->
         <div class="page" id="page7">
             <div class="emoji-icon">🌙✨</div>
-            <h1>Forever in Your Orbit.</h1>
+            <h1>Forever Mine.</h1>
             <div class="final-message">
-                <p class="final-message-text">
-                    You've made it to the end of the sky. There's no turning back now, and I'm never letting you go again.
+                <p>
+                    You've officially made it to the edge of my universe where there is no back button, no turning back, and I am never letting you drift away again.
                 </p>
                 <br>
-                <p>
-                    Happy Birthday, my beautiful, sensitive moon-gazer. Thank you for letting me back into your world, even if it's just a little bit for now. May your dreams tonight be as soft as the clouds, and may you always know that no matter how dark the night gets, you belong to me, and my heart is always shining directly on you.
+                <p class="final-message-text">
+                    Happy Birthday, my gorgeous, sensitive moon-gazer, thank you for letting me back into your world, and may your dreams tonight be as soft as the clouds knowing that no matter how much distance is between us, you belong to me, and my heart is completely locked on you.
                 </p>
                 <br>
                 <p style="font-weight: 700; color: var(--dark-pink); font-size: 1.2rem;">
-                    Eat well, sleep tight, and I cannot wait to see you soon. 🤍☁️
+                    I cannot wait to hold you in person very soon. 🤍❤️
                 </p>
             </div>
         </div>
     </div>
 
     <script>
-        // Create Starfield
-        function createStars() {
-            const starfield = document.getElementById('starfield');
-            for (let i = 0; i < 120; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                star.style.width = Math.random() * 2.5 + 'px';
-                star.style.height = star.style.width;
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                starfield.appendChild(star);
+        // Create Floating Hearts and Sparkles
+        const hearts = ['❤️', '💖', '💝', '💗', '💓', '💞'];
+        const sparkles = ['✨', '⭐', '💫'];
+        const heartsContainer = document.getElementById('hearts-container');
+
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+
+            heartsContainer.appendChild(heart);
+            setTimeout(() => heart.remove(), 12000);
+        }
+
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            sparkle.innerText = sparkles[Math.floor(Math.random() * sparkles.length)];
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 2 + 's';
+
+            heartsContainer.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 8000);
+        }
+
+        setInterval(createFloatingHeart, 500);
+        setInterval(createSparkle, 800);
+
+        // Countdown Timer
+        function updateCountdown() {
+            const targetDate = new Date('2026-07-19T00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance <= 0) {
+                document.getElementById('countdown').innerText = '🔓 UNLOCKED!';
+                document.getElementById('unlock-btn').disabled = false;
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerText = 
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (distance <= 0) {
+                document.getElementById('unlock-btn').disabled = false;
             }
         }
 
-        createStars();
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
 
-        // Floating Clouds
-        const clouds = ['☁️', '🌥️', '⛅'];
-        const cloudContainer = document.getElementById('cloud-container');
-
-        function createFloatingCloud() {
-            const cloud = document.createElement('div');
-            cloud.classList.add('cloud-float');
-            cloud.innerText = clouds[Math.floor(Math.random() * clouds.length)];
-            cloud.style.top = Math.random() * 60 + '%';
-            cloud.style.animationDuration = (Math.random() * 8 + 12) + 's';
-            cloud.style.animationDelay = Math.random() * 3 + 's';
-
-            cloudContainer.appendChild(cloud);
-
-            setTimeout(() => cloud.remove(), 22000);
+        // Unlock Surprise
+        function unlockSurprise() {
+            showPage(2);
         }
-
-        setInterval(createFloatingCloud, 2000);
 
         // Trap Choice Function
         function trapChoice() {
-            showPage('4_5');
+            showPage('5_5');
         }
 
         // Navigate Pages
