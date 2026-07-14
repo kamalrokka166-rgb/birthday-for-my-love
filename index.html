@@ -140,6 +140,55 @@
             font-weight: 600;
         }
 
+        /* Leaderboard List */
+        .leaderboard {
+            background: #f9f0f2;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .leaderboard-item {
+            padding: 12px;
+            margin: 8px 0;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        /* Contact Details */
+        .contact-details {
+            background: #f9f0f2;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .contact-item {
+            padding: 10px;
+            margin: 8px 0;
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        /* Error Message */
+        .error-box {
+            background: #ffe0e6;
+            border: 2px solid var(--primary-pink);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .error-text {
+            color: var(--dark-pink);
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.8;
+        }
+
         /* Buttons */
         .btn {
             background: linear-gradient(to right, var(--primary-pink), var(--secondary-pink));
@@ -153,6 +202,7 @@
             margin-top: 20px;
             transition: all 0.3s ease;
             font-weight: 600;
+            width: 100%;
         }
 
         .btn:hover {
@@ -168,6 +218,19 @@
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
+        }
+
+        /* Button Container for Multiple Buttons */
+        .button-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn-alt {
+            flex: 1;
+            min-width: 150px;
         }
 
         /* Lock Status */
@@ -204,6 +267,11 @@
             .message {
                 font-size: 1rem;
             }
+
+            .btn {
+                padding: 14px 30px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -211,12 +279,13 @@
     <div class="emoji-bg" id="emoji-container"></div>
 
     <div class="container">
-        <!-- Page 1: The Lock Screen -->
+        <!-- Page 1: The Gatekeeper -->
         <div class="page active" id="page1">
-            <div class="emoji-icon">🎁</div>
-            <h1>Open when it is 12:00 AM...</h1>
+            <div class="emoji-icon">🛑</div>
+            <h1>HOLD UP.</h1>
+            <h2>Access Denied... Unless it's 12:00 AM.</h2>
             <p class="lock-message">
-                Hey you. If it's officially your birthday, you are allowed to click the button below. No peeking early! 😉
+                If you are opening this early, I will literally know. Don't ruin the hype. If it's officially your birthday, click below to verify you aren't cheating. 😉
             </p>
 
             <div class="time-display">
@@ -229,44 +298,109 @@
             </div>
 
             <button class="btn" id="unlock-btn" onclick="unlockSurprise()" disabled>
-                Unlock My Surprise ✨
+                VERIFY: I am officially older now 🔓
             </button>
         </div>
 
-        <!-- Page 2: The Birthday Wish -->
+        <!-- Page 2: The Level Up -->
         <div class="page" id="page2">
-            <div class="emoji-icon">🎂</div>
-            <h1>Happy Birthday, Beautiful!</h1>
+            <div class="emoji-icon">👑</div>
+            <h1>Level Unlocked!</h1>
             <p class="message">
-                Even though we are miles apart, my heart is right there with you today. I hope this birthday brings you as much joy as you bring into my life every single day.
+                Happy Birthday! You officially survived another year of dealing with me. Honestly, that deserves a trophy by itself. Hope your day is absolute peak energy.
             </p>
-            <button class="btn" onclick="nextPage(2, 3)">Next Surprise 👉</button>
+            <button class="btn" onclick="nextPage(2, 3)">Claim Daily Rewards 👉</button>
         </div>
 
-        <!-- Page 3: The Sweet Note -->
+        <!-- Page 3: The Callout -->
         <div class="page" id="page3">
-            <div class="emoji-icon">❤️</div>
-            <h2>My Favorite Place...</h2>
+            <div class="emoji-icon">🎙️</div>
+            <h2>Late Night VIP</h2>
             <p class="message">
-                ...is wherever you are. I'm counting down the days until we don't have to say goodbye at airports anymore. You are my absolute favorite person.
+                Distance is trash, but honestly, there is nobody else I'd rather fall asleep on a call with or carry in-game (okay, maybe you carry me sometimes). From all the random screen shares to the absolute brain rot inside jokes we have, you're my favorite person to do absolutely nothing with.
             </p>
-            <button class="btn" onclick="nextPage(3, 4)">One Last Thing 👉</button>
+            <button class="btn" onclick="nextPage(3, 4)">See the Stats 👉</button>
         </div>
 
-        <!-- Page 4: The Final Reveal -->
+        <!-- Page 4: Why You're Actually Top Tier -->
         <div class="page" id="page4">
-            <div class="emoji-icon">✉️</div>
-            <h2>Now, Check Your Door/Email!</h2>
+            <div class="emoji-icon">🏆</div>
+            <h2>The Leaderboard</h2>
             <p class="message">
-                I have a little physical surprise headed your way (or check your inbox!). Once you've opened it, call me. I'm waiting to hear your voice!
+                Just a quick reminder of why you're top tier:
             </p>
-            <button class="btn" onclick="nextPage(4, 1)">Start Over 🔄</button>
+            <div class="leaderboard">
+                <div class="leaderboard-item">🔥 Your laugh (even when you're laughing at me, not with me).</div>
+                <div class="leaderboard-item">🔥 You actually match my energy and don't tell me to shut up.</div>
+                <div class="leaderboard-item">🔥 You're the absolute prettiest distraction in my life.</div>
+                <div class="leaderboard-item">🔥 You're just genuinely my best friend.</div>
+            </div>
+            <button class="btn" onclick="nextPage(4, 5)">Click for the Final Boss 👉</button>
+        </div>
+
+        <!-- Page 5: The "IOU" Date -->
+        <div class="page" id="page5">
+            <div class="emoji-icon">🥞</div>
+            <h2>The Real-Life Voucher</h2>
+            <p class="message">
+                Since I can't physically hand you a slice of cake right now without it getting ruined in transit, this page is a legally binding contract. Next time we link up, the massive dessert/dinner date is 100% on my tab. No arguments.
+            </p>
+            <button class="btn" onclick="nextPage(5, 6)">Next Step 👉</button>
+        </div>
+
+        <!-- Page 6: The Test -->
+        <div class="page" id="page6">
+            <div class="emoji-icon">🤔</div>
+            <h2>Moment of Truth...</h2>
+            <p class="message">
+                Be honest. Do you actually like this website surprise so far? Choose wisely.
+            </p>
+            <div class="button-container">
+                <button class="btn btn-alt" onclick="nextPage(6, 7)">Yes, I love it! 😍</button>
+                <button class="btn btn-alt" onclick="showError()">No, it's mid 🥱</button>
+            </div>
+        </div>
+
+        <!-- Page 6.5: The Force Reset -->
+        <div class="page" id="page6_5">
+            <div class="emoji-icon">🛑</div>
+            <h2>ERROR 404: Option Not Found</h2>
+            <div class="error-box">
+                <p class="error-text">
+                    Nice try, but nope!<br><br>
+                    You don't get a choice here. You have to like this website, and honestly, you have to like the person who made it for you too. The system has automatically corrected your mistake.
+                </p>
+            </div>
+            <p style="margin-top: 20px; color: #666;">Try again.</p>
+            <div class="button-container">
+                <button class="btn btn-alt" onclick="nextPage(6, 7)">Yes, I love it! 😍</button>
+                <button class="btn btn-alt" onclick="nextPage(6, 7)">Yes, he's the best 🐐</button>
+            </div>
+        </div>
+
+        <!-- Page 7: The Final Drop & Contact Details -->
+        <div class="page" id="page7">
+            <div class="emoji-icon">📦</div>
+            <h2>Check the Loot Drop!</h2>
+            <p class="message">
+                Alright, enough scrolling. Go check your doorstep, your email, or your messages right now. I left a little real-world loot drop waiting for you.
+            </p>
+            <p class="message">
+                Once you open it, you are legally required to report back to base immediately. Contact the mastermind who made this happen:
+            </p>
+            <div class="contact-details">
+                <div class="contact-item">📞 Call/WhatsApp: <strong>1234577890</strong></div>
+            </div>
+            <p class="message" style="font-weight: 700; color: var(--dark-pink);">
+                I'm waiting, pick up! 📲
+            </p>
+            <button class="btn" onclick="nextPage(7, 1)">GG, Play Again 🔄</button>
         </div>
     </div>
 
     <script>
         // Bounce Emojis
-        const emojis = ['💖', '🎁', '🎂', '❤️', '✨', '🎉', '💝'];
+        const emojis = ['💖', '🎁', '🎂', '❤️', '✨', '🎉', '💝', '👑', '🏆', '🥞'];
         const emojiContainer = document.getElementById('emoji-container');
 
         function createBounceEmoji() {
@@ -297,7 +431,6 @@
             document.getElementById('current-time').innerText = timeString;
 
             // Check if it's midnight or later for birthday
-            const isBirthday = now.getHours() >= 0 && now.getHours() < 24;
             const unlockBtn = document.getElementById('unlock-btn');
             const lockStatusText = document.getElementById('lock-status-text');
 
@@ -315,9 +448,14 @@
             showPage(2);
         }
 
+        // Show Error Page
+        function showError() {
+            showPage('6_5');
+        }
+
         // Navigate Pages
         function nextPage(currentPage, nextPage) {
-            if (nextPage > 4) {
+            if (nextPage > 7) {
                 nextPage = 1;
             }
             showPage(nextPage);
